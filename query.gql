@@ -1,2 +1,11 @@
 query {
+	queryPerson {
+		id
+		name
+		age
+		phones {
+			number
+			brand
+		}
+	}
 }

@@ -1,0 +1,17 @@
+type Person {
+  id: ID!
+  name: String!
+  age: Int!
+  phones: [PhoneNumber]!
+}
+
+enum PhoneBrand {
+  Apple
+  Android
+}
+
+type PhoneNumber {
+  id: ID!
+  number: String!
+  brand: PhoneBrand!
+}
