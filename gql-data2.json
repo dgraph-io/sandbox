@@ -1,0 +1,41 @@
+[
+    {
+        "dgraph.type": "Person",
+        "uid": "_:John",
+        "Person.name": "John",
+        "Person.age": 20,
+        "Person.phones": [
+            {
+                "dgraph.type": "PhoneNumber",
+                "PhoneNumber.number": 2222222222,
+                "PhoneNumber.brand": "Android"
+            }
+        ]
+    },
+    {
+        "dgraph.type": "Person",
+        "uid": "_:John",
+        "Person.name": "John",
+        "Person.age": 20,
+        "Person.phones": [
+            {
+                "dgraph.type": "PhoneNumber",
+                "PhoneNumber.number": 1111111111,
+                "PhoneNumber.brand": "Apple"
+            }
+        ]
+    },
+    {
+        "dgraph.type": "Person",
+        "uid": "_:Mary",
+        "Person.name": "Mary",
+        "Person.age": 21,
+        "Person.phones": [
+            {
+                "dgraph.type": "PhoneNumber",
+                "PhoneNumber.number": 3333333333,
+                "PhoneNumber.brand": "Android"
+            }
+        ]
+    }
+]

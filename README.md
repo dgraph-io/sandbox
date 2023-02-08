@@ -18,7 +18,7 @@ Have a look at the GraphQL schema: [schema.graphql](schema.graphql).
 
 I manually created the JSON-formatted, Dgraph-compatible import file [gql-data.json](gql-data.json) for this example, but you could use any CSV toolkit along with your prog lang of your choice to create this file.
 
-In gql-data.json, take note of the "dgraph.type" and "uid" fields. The "dgraph.type" binds the record to the type in your schema. The "uid" field allows the live loader to map that value with other records. For instance, I could have duplicated the split up the "_:John" record into two records, each with a single "Person.phones" entry, and the results would still be the same in the graph.
+In gql-data.json, take note of the "dgraph.type" and "uid" fields. The "dgraph.type" binds the record to the type in your schema. The "uid" field allows the live loader to map that value with other records. For instance, I could have duplicated the split up the "_:John" record into two records as illustrated in this [file](gql-data2.json), each with a single "Person.phones" entry, and the results would still be the same in the graph.
 
 ### Steps to reproduce for this branch-specific example
 
