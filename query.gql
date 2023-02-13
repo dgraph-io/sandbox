@@ -11,7 +11,10 @@ query ExampleQuery {
         valueNode {
           id
           ... on StringValueNode {
-            value
+            stringValue: value
+          }
+          ... on IntegerValueNode {
+            integerValue: value
           }
         }
       }

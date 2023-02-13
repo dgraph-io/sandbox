@@ -10,6 +10,15 @@ done with `make`, the only other requirement is Docker and optionally `jq` and `
 - gql (optional, for graphql queries, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
 - jq (optional, for queries from the command line)
 
+## ⚠️ Branch-specific steps
+1. make up
+Then in a new terminal...
+2. make schema-gql
+3. make load-data-gql
+4. make gql-query
+
+## ⚠️ End branch-specific steps
+
 ## Steps
 
 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
