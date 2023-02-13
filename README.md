@@ -17,6 +17,7 @@ Then in a new terminal...
 3. make load-data-gql
 4. make gql-query
 
+Created in response to https://discuss.dgraph.io/t/need-schema-design-help-hasinverse-interface/18219
 ## ⚠️ End branch-specific steps
 
 ## Steps
