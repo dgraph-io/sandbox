@@ -1,4 +1,30 @@
 [
-    {        
+    {
+        "dgraph.type": "EntityNode",
+        "uid": "_:entity1",
+        "EntityNode.connections": [
+            {
+                "dgraph.type": "EntityValConnectionNode",
+                "ConnectionNode.connectionType": "STORAGE_PATH",
+                "EntityValConnectionNode.entityNode": {
+                    "id": "_:entity1"
+                },
+                "EntityValConnectionNode.valueNode": {
+                    "dgraph.type": "StringValueNode",
+                    "StringValueNode.value": "/my/awesome/path"
+                }
+            },
+            {
+                "dgraph.type": "EntityValConnectionNode",
+                "ConnectionNode.connectionType": "ARTIFACT_SIZE",
+                "EntityValConnectionNode.entityNode": {
+                    "id": "_:entity1"
+                },
+                "EntityValConnectionNode.valueNode": {
+                    "dgraph.type": "IntegerValueNode",
+                    "IntegerValueNode.value": 64232
+                }
+            }
+        ]
     }
 ]

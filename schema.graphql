@@ -1,0 +1,43 @@
+# base entity node
+type EntityNode {
+  id: ID!
+  connections: [ConnectionNode] #hasInverse <- but what field should I name???
+}
+
+# base value node
+interface ValueNode {
+  id: ID!
+  connections: [ConnectionNode] #hasInverse <- but what field should I name???
+}
+
+type StringValueNode implements ValueNode {
+  value: String!
+}
+
+type IntegerValueNode implements ValueNode {
+  value: Int!
+}
+
+interface ConnectionNode {
+  connectionType: ConnectionType! @search
+}
+
+type EntityConnectionNode implements ConnectionNode {
+  node1: EntityNode!
+  node2: EntityNode!
+}
+
+type ValueConnectionNode implements ConnectionNode {
+  node1: ValueNode!
+  node2: ValueNode!
+}
+
+type EntityValConnectionNode implements ConnectionNode {
+  entityNode: EntityNode!
+  valueNode: ValueNode!
+}
+
+enum ConnectionType {
+  STORAGE_PATH
+  ARTIFACT_SIZE
+}
