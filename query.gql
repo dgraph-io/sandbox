@@ -1,2 +1,9 @@
 query {
+	querySensor {
+		id
+		xid
+		value
+		timestamp
+		unit
+	}
 }

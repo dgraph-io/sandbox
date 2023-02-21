@@ -1,4 +1,9 @@
 [
-    {        
+    {
+        "dgraph.type": "Sensor",
+        "Sensor.xid": "aaabbbccc",
+        "Sensor.value": 256,
+        "Sensor.timestamp": "2019-01-01T00:00:00Z",
+        "Sensor.unit": "C"
     }
 ]
