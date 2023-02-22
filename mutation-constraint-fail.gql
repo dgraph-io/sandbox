@@ -1,0 +1,13 @@
+mutation {
+	#missingReputation: newAuthor(name: "Mark Twain", reputation: 0) {
+	#	id
+	#	name
+	#	reputation
+	#}
+
+	nameLengthLessThan3: newAuthor(name: "Ma", reputation: 3.0) {
+		id
+		name
+		reputation
+	}
+}

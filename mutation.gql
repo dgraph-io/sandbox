@@ -1,2 +1,7 @@
 mutation {
+	passing: newAuthor(name: "Mark Twain", reputation: 100) {
+		id
+		name
+		reputation
+	}
 }

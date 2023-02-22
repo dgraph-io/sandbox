@@ -1,2 +1,12 @@
 query {
+	queryAuthor {
+		id
+		name
+		bio
+	}
+
+	authorsByName(name: "Foo") {
+		name
+		reputation
+	}	
 }
