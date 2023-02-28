@@ -10,7 +10,17 @@ type Farm {
     turbines: [Turbine!] @hasInverse(field: installed_at)
 }
 
-type Turbine {
+type Turbine @auth(
+    query: {
+      rule: """
+        query ($groups: [String]!) {
+            queryTurbine(filter: { accessGroup: { in: $groups } }) {
+                id
+            }
+        }
+      """
+    }
+  ) {
     id: String! @id
     manufacturer: String
     model: String    
@@ -43,3 +53,6 @@ type Capacity {
     total: Float
     unit: String
 }
+
+# Note the VerificationKey below should never be used elsewhere. It was randomly generated for this demo.
+# Dgraph.Authorization {"VerificationKey":"vDK59uv+QxbuRpwdcFyYdTlLahaFDG0g2rf7+pc+jkk=","Header":"X-myapp","Namespace":"https://myapp.com/jwt/claims","Algo":"HS256","Audience":["myapp"]}

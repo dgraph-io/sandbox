@@ -1,0 +1,9 @@
+query {
+  queryFarm {
+    name
+    turbines {
+      id
+      number_of_blades
+    }
+  }
+}

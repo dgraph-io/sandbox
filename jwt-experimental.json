@@ -1,0 +1,9 @@
+{
+    "https://myapp.com/jwt/claims": {
+      "groups": [
+        "staff",
+        "experimental"
+      ]
+    },
+    "aud": "myapp"
+}

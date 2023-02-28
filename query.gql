@@ -1,2 +1,8 @@
-query {
+query QueryTurbine {
+  queryTurbine {
+    id
+    model
+    number_of_blades
+    accessGroup
+  }
 }
