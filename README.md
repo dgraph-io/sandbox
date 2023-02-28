@@ -13,13 +13,13 @@ For this branch, the JWT command line encoder is required, see https://github.co
 
 ## Steps
 
-1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
+### 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
 
 ## ⚠️ Branch-specific Steps ⚠️
 
-This branch demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph **CLOUD** cluster
+This branch demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph **CLOUD** cluster with illustrative Python clients.
 
-2. Launch/use a cloud instance at https://cloud.dgraph.io
+### 2. Launch/use a cloud instance at https://cloud.dgraph.io
 
 Locate your GraphQL service endpoint, should be something like `https://foo-bar.us-east-1.aws.cloud.dgraph.io`. This is found on your Dgraph cloud console Overview page, there's a copy-to-paste-buffer icon next to it. **Drop the /graphql suffix when setting the environment variable**
 
@@ -36,36 +36,45 @@ export DGC_ADMIN_KEY=<your admin key>
 
 To test the use of the `X-Auth-Token` headers against your graphql endpoint, you should ensure that "Anonymous Access" is turned off. This is done in the Schema page, under the Access tab.
 
-3. Then in another terminal, load the basic schema with no authentication
+### 3. Setup your python environment
+
+```
+pip3 install python-graphql-client
+pip install PyJWT
+```
+
+The python examples are located at step 17.
+
+### 4. Load the basic schema with no types protected by authentication
 
 ```
 make schema-gql
 ```
 
-4. Load 5 Turbines across 3 farms. One of the Turbines has the `accessGroup` predicate set to _experimental_
+### 5. Load 5 Turbines across 3 farms. One of the Turbines has the `accessGroup` predicate set to _experimental_
 
 ```
 make load-data-dql-json
 ```
 
-5. Query against the un-authenticated cluster:
+### 6. Query against the un-authenticated cluster:
 
 ```
 make query-gql
 ```
 
-6. Restrict query access to Turbines based on the custom groups claim present in a JWT token
+### 7. Restrict query access to Turbines based on the custom groups claim present in a JWT token
 
 ```
 make schema-gql-auth
 ```
 
-7. Run the query again, now the query authentication is working (no data returned)
+### 8. Run the query again, now the query authentication is working (no data returned)
 ```
 make query-gql
 ```
 
-8. Run the query again, but this time encode the token in [jwt.json](jwt.json) with the "staff" group and include it in the query header
+### 9. Run the query again, but this time encode the token in [jwt.json](jwt.json) with the "staff" group and include it in the query header
 
 ```
 make query-gql-auth
@@ -73,7 +82,7 @@ make query-gql-auth
 
 The four Turbines that match the sole JWT group list are returned
 
-9. Run the query again, but this time encode a token with both "staff" and "experimental" elements in the JWT group
+### 10. Run the query again, but this time encode a token with both "staff" and "experimental" elements in the JWT group
 
 ```
 make query-gql-auth-experimental
@@ -81,7 +90,7 @@ make query-gql-auth-experimental
 
 Now all five Turbines are returned
 
-10. Run a query starting at the Farms _level_ to demonstrate authentication rules are enforced in traversals
+### 11. Run a query starting at the Farms _level_ to demonstrate authentication rules are enforced in traversals
 
 ```
 make query-gql-farms
@@ -89,13 +98,13 @@ make query-gql-farms
 
 Because no JWT was present, the traversal of the `turbines` predicates yields empty arrays.
 
-11. Run the same query, this time sending a property encoded JWT with all groups defined.
+### 12. Run the same query, this time sending a property encoded JWT with all groups defined.
 
 ```
 make query-gql-farms-auth-experimental
 ```
 
-12. Update one of the turbines:
+### 13. Update one of the turbines:
 
 ```
 make mutation-gql
@@ -103,13 +112,13 @@ make mutation-gql
 
 The record is updated, but because the query auth is in place the results cannot be returned
 
-13. Update the schema with `update` auth protection
+### 14. Update the schema with `update` auth protection
 
 ```
 make schema-gql-auth-mutate
 ```
 
-14. Try to update the Turbine again
+### 15. Try to update the Turbine again
 
 ```
 make mutation-gql
@@ -117,13 +126,24 @@ make mutation-gql
 
 No records updated
 
-15. Update the Turbine now with a correct JWT token
+### 16. Update the Turbine now with a correct JWT token
 
 ```
 make mutation-gql-auth-experimental
 ```
 
 The `update` auth rules allow this update because the correct group was encoded in the JWT custom claims
+
+### 17. Try the various python scripts before and after the schema is authenticated.
+
+```
+make schema-gql                           # no auth
+python3 query-no-auth.py
+make schema-gql-auth                      # read auth on the Turbines
+python3 query-no-auth.py                  # auth is in place, empty results
+python3 query-auth-staff.py               # query with the 'staff' group entry in a JWT
+python3 query-auth-staff-experimental.py  # query with the 'staff' and 'experimental' group entries in a JWT
+```
 
 ## ⚠️ End of branch-specific Steps ⚠️
 
