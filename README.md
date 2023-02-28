@@ -21,9 +21,9 @@ For this fork, the JWT command line encoder is required, see https://github.com/
 make up
 ```
 
-## ⚠️ Fork-specific Steps ⚠️
+## ⚠️ Branch-specific Steps ⚠️
 
-This fork demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph cluster
+This branch demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph cluster
 
 3. Then in another terminal, load the basic schema with no authentication
 
@@ -114,7 +114,7 @@ make mutation-gql-auth-experimental
 
 The `update` auth rules allow this update because the correct group was encoded in the JWT custom claims
 
-## ⚠️ End of fork-specific Steps ⚠️
+## ⚠️ End of branch-specific Steps ⚠️
 
 ## Make targets
 
