@@ -10,6 +10,8 @@ done with `make`, the only other requirement is Docker and optionally `jq` and `
 - gql (optional, for graphql queries, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
 - jq (optional, for queries from the command line)
 
+For this fork, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
+
 ## Steps
 
 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
