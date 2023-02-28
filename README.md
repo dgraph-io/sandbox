@@ -6,10 +6,9 @@ done with `make`, the only other requirement is Docker and optionally `jq` and `
 #### Requirements
 - make
 - curl
-- gql (optional, for graphql queries, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
+- python and some two packages, see step 3 below
+- gql (optional, for graphql queries from Makefile, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
 - jq (optional, for queries from the command line)
-
-For this branch, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
 
 ## Steps
 
