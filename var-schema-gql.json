@@ -1,0 +1,3 @@
+{
+    "sch": "type Farm { id: ID! }"
+}

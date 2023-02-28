@@ -1,0 +1,8 @@
+mutation UpdateSchema($sch: String!) {
+    updateGQLSchema(input: { set: { schema: $sch}}) {
+        gqlSchema {
+            schema
+            generatedSchema
+        }
+    }
+}    

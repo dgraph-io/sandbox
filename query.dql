@@ -1,4 +1,5 @@
-{
-	q() {
-	}
+query {
+    me(func: type(Turbine)) {
+        Turbine.id
+    }
 }

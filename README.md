@@ -4,26 +4,37 @@ This repo serves as a quick start for spinning up a Dgraph cluster, updating a s
 done with `make`, the only other requirement is Docker and optionally `jq` and `gql`.
 
 #### Requirements
-- Docker
 - make
-- curl (optional, for queries from the command line)
+- curl
 - gql (optional, for graphql queries, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
 - jq (optional, for queries from the command line)
 
-For this fork, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
+For this branch, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
 
 ## Steps
 
 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
 
-2. Spin up the cluster
+## ⚠️ Branch-specific Steps ⚠️
+
+This branch demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph **CLOUD** cluster
+
+2. Launch/use a cloud instance at https://cloud.dgraph.io
+
+Locate your GraphQL service endpoint, should be something like `https://foo-bar.us-east-1.aws.cloud.dgraph.io`. This is found on your Dgraph cloud console Overview page, there's a copy-to-paste-buffer icon next to it. **Drop the /graphql suffix when setting the environment variable**
+
+Export that to environment variable DGC_ENDPOINT
 ```
-make up
+export DGC_ENDPOINT=<your service endpoint>
 ```
 
-## ⚠️ Fork-specific Steps ⚠️
+On the Dgraph cloud console, under Admin - Settings (left menu bar), create an **Admin** key. Export that key thusly:
 
-This fork demonstrates using custom JWT claims for query and mutation authentication in a GraphQL-based Dgraph cluster
+```
+export DGC_ADMIN_KEY=<your admin key>
+```
+
+To test the use of the `X-Auth-Token` headers against your graphql endpoint, you should ensure that "Anonymous Access" is turned off. This is done in the Schema page, under the Access tab.
 
 3. Then in another terminal, load the basic schema with no authentication
 
@@ -114,7 +125,7 @@ make mutation-gql-auth-experimental
 
 The `update` auth rules allow this update because the correct group was encoded in the JWT custom claims
 
-## ⚠️ End of fork-specific Steps ⚠️
+## ⚠️ End of branch-specific Steps ⚠️
 
 ## Make targets
 
@@ -397,4 +408,3 @@ Example variables.json:
     }
 }
 ```
-
