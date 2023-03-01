@@ -10,9 +10,11 @@ done with `make`, the only other requirement is Docker and optionally `jq` and `
 - gql (optional, for graphql queries from Makefile, download from [here](https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds))
 - jq (optional, for queries from the command line)
 
+For this branch, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
+
 ## Steps
 
-### 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue.
+### 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue. This is branch `examples/auth-via-graphql-cloud-python`.
 
 ## ⚠️ Branch-specific Steps ⚠️
 
@@ -39,8 +41,10 @@ To test the use of the `X-Auth-Token` headers against your graphql endpoint, you
 
 ```
 pip3 install python-graphql-client
-pip install PyJWT
+pip3 install PyJWT
 ```
+
+...or just `pip`.
 
 The python examples are located at step 17.
 
