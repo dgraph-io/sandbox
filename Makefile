@@ -24,7 +24,8 @@ login-bob: ## Login to the alpha container as a user
 
 acl-accounts: login-groot
 ifneq (,$(wildcard ./acl-accounts.gql))
-	@gql file --query-file acl-accounts.gql --header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/admin
+	@gql file --query-file acl-accounts.gql \
+		--header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/admin
 else
 	@echo "No acl-accounts.gql found"
 endif
@@ -72,66 +73,32 @@ else
 	@echo "No dql-data.json file found"
 endif
 
-query-dql: ## Runs the query present in query.dql
-ifneq (,$(wildcard ./query.dql))
-	@curl --data-binary '@./query.dql' --header 'Content-Type: application/dql' --header 'Dg-Auth: $(DGC_ADMIN_KEY)' -X POST http://localhost:8080/query
-else
-	@echo "No query.dql file found"
-endif
-
 update-farm-status-bob: login-bob ## Updates the status of a farm as bob
 ifneq (,$(wildcard ./mutation-farm.status.gql))
-	@gql file --query-file mutation-farm.status.gql --header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/graphql
+	@echo "This should fail"
+	@gql file --query-file mutation-farm.status.gql \
+		--header 'X-Dgraph-AccessToken=$(TOKEN)' \
+		--endpoint http://localhost:8080/graphql
 else
 	@echo "No mutation-farm.status.gql file found"
 endif
 
-update-farm-status-alice: login-alice ## Updates the status of a farm as bob
+update-farm-status-alice: login-alice ## Updates the status of a farm as alice
 ifneq (,$(wildcard ./mutation-farm.status.gql))
 	@gql file --query-file mutation-farm.status.gql --header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/graphql
 else
 	@echo "No mutation-farm.status.gql file found"
-endif
-
-
-mutation-gql: ## Runs the mutation present in mutation.gql
-ifeq (, $(shell which gql))
-	@echo "No gql in $(PATH), download from https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds"
-else
-	@gql file --query-file mutation.gql --variables-file variables.json --header Dg-Auth=$(DGC_ADMIN_KEY) --endpoint http://localhost:8080/graphql
-endif
-
-mutation-gql-auth: ## Runs the mutation present in mutation.gql with the JWT token in the header
-ifeq (, $(shell which jwt))
-	@echo "No jwt in $(PATH), download from https://github.com/mike-engel/jwt-cli"
-else
-	@echo "Encoding claims in jwt.json"
-	$(eval CLAIMS := $(shell cat jwt.json))
-	$(eval TOKEN := $(shell jwt encode --secret vDK59uv+QxbuRpwdcFyYdTlLahaFDG0g2rf7+pc+jkk= '$(CLAIMS)'))
-	@echo "Issuing query with JWT token in header"
-	@gql file --query-file mutation.gql --variables-file variables.json --header Dg-Auth=$(DGC_ADMIN_KEY) --header X-myapp=$(TOKEN) --endpoint http://localhost:8080/graphql
-endif
-
-mutation-gql-auth-experimental: ## Runs the mutation present in mutation.gql with the experimental group JWT token in the header
-ifeq (, $(shell which jwt))
-	@echo "No jwt in $(PATH), download from https://github.com/mike-engel/jwt-cli"
-else
-	@echo "Encoding claims in jwt-experimental.json"
-	$(eval CLAIMS := $(shell cat jwt-experimental.json))
-	$(eval TOKEN := $(shell jwt encode --secret vDK59uv+QxbuRpwdcFyYdTlLahaFDG0g2rf7+pc+jkk= '$(CLAIMS)'))
-	@echo "Issuing query with JWT token in header"
-	@gql file --query-file mutation.gql --variables-file variables.json --header Dg-Auth=$(DGC_ADMIN_KEY) --header X-myapp=$(TOKEN) --endpoint http://localhost:8080/graphql
 endif
 
 query-gql: ## Runs the query present in query.gql and variables in variables.json (requires gql)
 ifeq (, $(shell which gql))
 	@echo "No gql in $(PATH), download from https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds"
 else
+	@echo "This should fail"
 	@gql file --query-file query.gql --variables-file variables.json --endpoint http://localhost:8080/graphql
 endif
 
-# Runs the query present in query.graphql with the JWT token in the header
-query-gql-acl-auth: login-alice
+query-gql-acl-auth: login-alice ## Runs the query present in query.gql with the JWT token in the header
 ifeq (, $(shell which gql))
 	@echo "No gql in $(PATH), download from https://github.com/matthewmcneely/gql/tree/feature/add-query-and-variables-from-file/builds"
 else
