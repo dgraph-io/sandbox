@@ -1,6 +1,6 @@
 type Farm {
     id: ID!
-    name: String! @search(by: [fulltext])
+    name: String! @search(by: [term])
     owner: String!
     location: Location
     capacity: Capacity

@@ -1,0 +1,57 @@
+mutation {
+  addUser(input: [{name: "alice", password: "supersecret"}]) {
+    user {
+      name
+    }
+  }
+  addUser(input: [{name: "bob", password: "supersecret"}]) {
+    user {
+      name
+    }
+  }
+  addGroup(input: [{name: "mgr"}, {name: "viewer"}]) {
+    group {
+      name
+    }
+  }
+  updateUser(
+    input: {
+      filter: { name: { eq: "alice" } }
+      set: { groups: [{ name: "mgr" }] }
+    }
+  ) {
+    user {
+      name
+      groups {
+        name
+      }
+    }
+  }
+  updateUser(
+    input: {
+      filter: { name: { eq: "bob" } }
+      set: { groups: [{ name: "viewer" }] }
+    }
+  ) {
+    user {
+      name
+      groups {
+        name
+      }
+    }
+  }
+  updateGroup(
+    input: {
+      filter: { name: { eq: "viewer" } }
+      set: { rules: [{ predicate: "Farm.status", permission: 4 }] }
+    }
+  ) {
+    group {
+      name
+      rules {
+        permission
+        predicate
+      }
+    }
+  }
+}

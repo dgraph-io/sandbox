@@ -1,0 +1,20 @@
+mutation Mutation {
+  updateFarm(
+    input: { 
+      set: { 
+        status: "inactive"
+      }, 
+      filter: { 
+        name: { 
+          eq: "Wind Farm Sun Rising" 
+        } 
+      }
+    }
+  ) {
+    numUids
+    farm {
+      name
+      status
+    }
+  }
+}

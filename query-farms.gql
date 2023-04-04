@@ -1,6 +1,7 @@
 query {
   queryFarm {
     name
+    status
     turbines {
       id
       number_of_blades

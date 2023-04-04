@@ -1,6 +1,23 @@
 {
     "set": [
         {
+            "uid": "_:WTEVE002",
+            "dgraph.type": "Turbine",
+            "Turbine.tid": "WTEVE002",
+            "Turbine.manufacturer": "Vestas",
+            "Turbine.model": "V90-2.0 MW",
+            "Turbine.number_of_blades": 3,
+            "Turbine.capacity": {
+                "dgraph.type": "Capacity",
+                "Capacity.rated_power": 7.7,
+                "Capacity.unit": "MW"
+            },
+            "Turbine.installed_at": {
+                "uid": "_:WF001"
+            },
+            "Turbine.accessGroup": "staff"
+        },
+        {            
             "uid": "_:WF001",
             "dgraph.type": "Farm",
             "Farm.name": "Honey Ridge Wind Farm",
@@ -19,20 +36,7 @@
             "Farm.annual_energy_production": "385 GWh",
             "Farm.turbines": [
                 {
-                    "dgraph.type": "Turbine",
-                    "Turbine.id": "WTEVE002",
-                    "Turbine.manufacturer": "Vestas",
-                    "Turbine.model": "V90-2.0 MW",
-                    "Turbine.number_of_blades": 3,
-                    "Turbine.capacity": {
-                        "dgraph.type": "Capacity",
-                        "Capacity.rated_power": 7.7,
-                        "Capacity.unit": "MW"
-                    },
-                    "Turbine.installed_at": {
-                        "uid": "_:WF001"
-                    },
-                    "Turbine.accessGroup": "staff"
+                    "uid": "_:WTEVE002"
                 }
             ],
             "Farm.status": "active"
@@ -57,7 +61,7 @@
             "Farm.turbines": [
                 {
                     "dgraph.type": "Turbine",
-                    "Turbine.id": "WTEVE002",
+                    "Turbine.tid": "WTEVE002",
                     "Turbine.manufacturer": "Vestas",
                     "Turbine.model": "V90-2.0 MW",
                     "Turbine.number_of_blades": 3,
@@ -94,7 +98,7 @@
             "Farm.turbines": [
                 {
                     "dgraph.type": "Turbine",
-                    "Turbine.id": "WT001",
+                    "Turbine.tid": "WT001",
                     "Turbine.manufacturer": "Siemens",
                     "Turbine.model": "SG 8.0-167 DD",
                     "Turbine.number_of_blades": 3,
@@ -110,7 +114,7 @@
                 },
                 {
                     "dgraph.type": "Turbine",
-                    "Turbine.id": "WT002",
+                    "Turbine.tid": "WT002",
                     "Turbine.manufacturer": "GE",
                     "Turbine.model": "Haliade-X 13 MW",
                     "Turbine.number_of_blades": 3,
@@ -126,7 +130,7 @@
                 },
                 {
                     "dgraph.type": "Turbine",
-                    "Turbine.id": "WT003",
+                    "Turbine.tid": "WT003",
                     "Turbine.manufacturer": "Vestas",
                     "Turbine.model": "V236-15.0 MW",
                     "Turbine.number_of_blades": 3,

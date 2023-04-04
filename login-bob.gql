@@ -1,0 +1,8 @@
+mutation {
+  login(userId: "bob", password: "supersecret") {
+    response {
+      accessJWT
+      refreshJWT
+    }
+  }
+}
