@@ -12,6 +12,27 @@ done with `make`, the only other requirement is Docker and optionally `jq` and `
 
 For this branch, the JWT command line encoder is required, see https://github.com/mike-engel/jwt-cli
 
+## Overview
+```bash
+rm -rf ~/test-dgraph-data/
+make keys
+make up
+
+# new window
+make schema-gql
+make acl-accounts
+# review the Ratel dashboard
+make load-data-dql-json
+make update-farm-status-bob
+make update-farm-status-alice
+make query-farms
+make schema-gql-auth
+make query-gql-auth-experimental
+make query-gql-auth-just-staff
+python3 query-auth-staff.py
+python3 query-auth-staff-experimental.py
+```
+
 ## Steps
 
 ### 1. Clone this repo. It's possible I've created a branch for some issue we're collaborating on. If so, check out the branch for the issue. This is branch `examples/auth-via-graphql-cloud-python`.
