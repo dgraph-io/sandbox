@@ -1,0 +1,57 @@
+mutation {
+  addUser(input: [{name: "alice-in-ns", password: "supersecret"}]) {
+    user {
+      name
+    }
+  }
+  addUser(input: [{name: "bob-in-ns", password: "supersecret"}]) {
+    user {
+      name
+    }
+  }
+  addGroup(input: [{name: "mgr-in-ns"}, {name: "viewer-in-ns"}]) {
+    group {
+      name
+    }
+  }
+  updateUser(
+    input: {
+      filter: { name: { eq: "alice-in-ns" } }
+      set: { groups: [{ name: "mgr-in-ns" }] }
+    }
+  ) {
+    user {
+      name
+      groups {
+        name
+      }
+    }
+  }
+  updateUser(
+    input: {
+      filter: { name: { eq: "bob-in-ns" } }
+      set: { groups: [{ name: "viewer-in-ns" }] }
+    }
+  ) {
+    user {
+      name
+      groups {
+        name
+      }
+    }
+  }
+  updateGroup(
+    input: {
+      filter: { name: { eq: "viewer-in-ns" } }
+      set: { rules: [{ predicate: "FarmNS.status", permission: 4 }] }
+    }
+  ) {
+    group {
+      name
+      rules {
+        permission
+        predicate
+      }
+    }
+  }
+}

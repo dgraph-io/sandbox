@@ -6,7 +6,7 @@
             "Farm.name": "Honey Ridge Wind Farm",
             "Farm.owner": "HRW, LLC",
             "Farm.location": {
-                "dgraph.type": "location",
+                "dgraph.type": "Location",
                 "Location.latitude": "-5.8724",
                 "Location.longitude": "-37.1636"
             },
@@ -43,7 +43,7 @@
             "Farm.name": "Holy Cross Wind Power Farm",
             "Farm.owner": "HCWP, LLC",
             "Farm.location": {
-                "dgraph.type": "location",
+                "dgraph.type": "Location",
                 "Location.latitude": "-5.8724",
                 "Location.longitude": "-37.1636"
             },
@@ -81,7 +81,7 @@
             "Farm.name": "Wind Farm Sun Rising",
             "Farm.owner": "WFSR, LLC",
             "Farm.location": {
-                "dgraph.type": "location",
+                "dgraph.type": "Location",
                 "Location.latitude": "40.7128",
                 "Location.longitude": "-74.006"
             },
@@ -130,7 +130,7 @@
                     "Turbine.manufacturer": "Vestas",
                     "Turbine.model": "V236-15.0 MW",
                     "Turbine.number_of_blades": 3,
-                    "capacity": {
+                    "Turbine.capacity": {
                         "dgraph.type": "Capacity",
                         "Capacity.rated_power": 15,
                         "Capacity.unit": "MW"

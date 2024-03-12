@@ -1,0 +1,147 @@
+{
+    "set": [
+        {
+            "uid": "_:WF001",
+            "dgraph.type": "FarmNS",
+            "FarmNS.name": "Honey Ridge Wind Farm",
+            "FarmNS.owner": "HRW, LLC",
+            "FarmNS.location": {
+                "dgraph.type": "LocationNS",
+                "LocationNS.latitude": "-5.8724",
+                "LocationNS.longitude": "-37.1636"
+            },
+            "FarmNS.capacity": {
+                "dgraph.type": "CapacityNS",
+                "CapacityNS.total": 150,
+                "CapacityNS.unit": "MW"
+            },
+            "FarmNS.number_of_turbines": 50,
+            "FarmNS.annual_energy_production": "385 GWh",
+            "FarmNS.turbines": [
+                {
+                    "dgraph.type": "TurbineNS",
+                    "TurbineNS.id": "WTEVE002",
+                    "TurbineNS.manufacturer": "Vestas",
+                    "TurbineNS.model": "V90-2.0 MW",
+                    "TurbineNS.number_of_blades": 3,
+                    "TurbineNS.capacity": {
+                        "dgraph.type": "CapacityNS",
+                        "CapacityNS.rated_power": 7.7,
+                        "CapacityNS.unit": "MW"
+                    },
+                    "TurbineNS.installed_at": {
+                        "uid": "_:WF001"
+                    },
+                    "TurbineNS.accessGroup": "staff"
+                }
+            ],
+            "FarmNS.status": "active"
+        },
+        {
+            "uid": "_:WF002",
+            "dgraph.type": "FarmNS",
+            "FarmNS.name": "Holy Cross Wind Power Farm",
+            "FarmNS.owner": "HCWP, LLC",
+            "FarmNS.location": {
+                "dgraph.type": "LocationNS",
+                "LocationNS.latitude": "-5.8724",
+                "LocationNS.longitude": "-37.1636"
+            },
+            "FarmNS.capacity": {
+                "dgraph.type": "CapacityNS",
+                "CapacityNS.total": 150,
+                "CapacityNS.unit": "MW"
+            },
+            "FarmNS.number_of_turbines": 50,
+            "FarmNS.annual_energy_production": "385 GWh",
+            "FarmNS.turbines": [
+                {
+                    "dgraph.type": "TurbineNS",
+                    "TurbineNS.id": "WTEVE002",
+                    "TurbineNS.manufacturer": "Vestas",
+                    "TurbineNS.model": "V90-2.0 MW",
+                    "TurbineNS.number_of_blades": 3,
+                    "TurbineNS.capacity": {
+                        "dgraph.type": "CapacityNS",
+                        "CapacityNS.rated_power": 7.7,
+                        "CapacityNS.unit": "MW"
+                    },
+                    "TurbineNS.installed_at": {
+                        "uid": "_:WF002"
+                    },
+                    "TurbineNS.accessGroup": "staff"
+                }
+            ],
+            "FarmNS.status": "active"
+        },
+        {
+            "uid": "_:WF003",
+            "dgraph.type": "Farm",
+            "FarmNS.id": "WF003",
+            "FarmNS.name": "Wind Farm Sun Rising",
+            "FarmNS.owner": "WFSR, LLC",
+            "FarmNS.location": {
+                "dgraph.type": "LocationNS",
+                "LocationNS.latitude": "40.7128",
+                "LocationNS.longitude": "-74.006"
+            },
+            "FarmNS.capacity": {
+                "dgraph.type": "CapacityNS",
+                "CapacityNS.total": 1000,
+                "CapacityNS.unit": "MW"
+            },
+            "FarmNS.number_of_turbines": 15,
+            "FarmNS.turbines": [
+                {
+                    "dgraph.type": "TurbineNS",
+                    "TurbineNS.id": "WT001",
+                    "TurbineNS.manufacturer": "Siemens",
+                    "TurbineNS.model": "SG 8.0-167 DD",
+                    "TurbineNS.number_of_blades": 3,
+                    "TurbineNS.capacity": {
+                        "dgraph.type": "CapacityNS",
+                        "CapacityNS.rated_power": 8,
+                        "CapacityNS.unit": "MW"
+                    },
+                    "TurbineNS.installed_at": {
+                        "uid": "_:WF003"
+                    },
+                    "TurbineNS.accessGroup": "staff"
+                },
+                {
+                    "dgraph.type": "TurbineNS",
+                    "TurbineNS.id": "WT002",
+                    "TurbineNS.manufacturer": "GE",
+                    "TurbineNS.model": "Haliade-X 13 MW",
+                    "TurbineNS.number_of_blades": 3,
+                    "TurbineNS.capacity": {
+                        "dgraph.type": "CapacityNS",
+                        "CapacityNS.rated_power": 13,
+                        "CapacityNS.unit": "MW"
+                    },
+                    "TurbineNS.installed_at": {
+                        "uid": "_:WF003"
+                    },
+                    "TurbineNS.accessGroup": "staff"
+                },
+                {
+                    "dgraph.type": "TurbineNS",
+                    "TurbineNS.id": "WT003",
+                    "TurbineNS.manufacturer": "Vestas",
+                    "TurbineNS.model": "V236-15.0 MW",
+                    "TurbineNS.number_of_blades": 3,
+                    "TurbineNS.capacity": {
+                        "dgraph.type": "CapacityNS",
+                        "CapacityNS.rated_power": 15,
+                        "CapacityNS.unit": "MW"
+                    },
+                    "TurbineNS.installed_at": {
+                        "uid": "_:WF003"
+                    },
+                    "TurbineNS.accessGroup": "experimental"
+                }
+            ],
+            "FarmNS.status": "active"
+        }
+    ]
+}

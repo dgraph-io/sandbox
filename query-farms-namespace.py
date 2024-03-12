@@ -10,7 +10,7 @@ client = GraphqlClient(endpoint="http://localhost:8080/admin")
 # login thru ACL
 query = """
 mutation {
-  login(userId: "bob", password: "supersecret") {
+  login(userId: "bob-in-ns", password: "supersecret", namespace: 1) {
     response {
       accessJWT
       refreshJWT
@@ -19,32 +19,22 @@ mutation {
 }
 """
 data = client.execute(query=query, variables={})
+print(data)
 accessJWT = data['data']['login']['response']['accessJWT']
-
-print("accessJWT: ", accessJWT)
 
 client = GraphqlClient(endpoint="http://localhost:8080/graphql")
 
 # Create the query string and variables required for the request.
 query = """
-query QueryTurbine {
-  queryTurbine {
-    id
-    model
-    number_of_blades
-    accessGroup
+query {
+  queryFarmNS {
+    status
   }
 }"""
 variables = {}
-with open('./jwt.json', 'r') as file:
-    jwtRawToken = json.load(file)
-
-encoded = jwt.encode(jwtRawToken, "vDK59uv+QxbuRpwdcFyYdTlLahaFDG0g2rf7+pc+jkk=", algorithm='HS256')
 headers = {
     "X-Dgraph-AccessToken": accessJWT,
-    "X-myapp": encoded
 }
-
 
 # Synchronous request
 data = client.execute(query=query, variables=variables, headers=headers)

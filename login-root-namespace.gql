@@ -1,0 +1,8 @@
+mutation {
+  login(userId: "groot", password: "namespace-pw", namespace: 1) {
+    response {
+      accessJWT
+      refreshJWT
+    }
+  }
+}

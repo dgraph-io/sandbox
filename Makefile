@@ -13,13 +13,22 @@ up: ## Start the zero and alpha containers
 down: ## Stop the containers
 	DGRAPH_VERSION=$(DGRAPH_VERSION) docker-compose stop
 
-login-groot: ## Login to the alpha container
+login-groot: ## Login to the alpha container as groot
 	$(eval TOKEN := $(shell gql file --query-file login-groot.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
 
-login-alice: ## Login to the alpha container as a user
+login-root-namespace: ## Login to the alpha container as namespace 1 root
+	$(eval TOKEN := $(shell gql file --query-file login-root-namespace.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
+
+login-alice: ## Login to the alpha container as a user in namespace 0
 	$(eval TOKEN := $(shell gql file --query-file login-alice.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
 
-login-bob: ## Login to the alpha container as a user
+login-alice-namespace: ## Login to the alpha container as a user in namespace 1
+	$(eval TOKEN := $(shell gql file --query-file login-alice.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
+
+login-bob: ## Login to the alpha container as a user in namespace 0
+	$(eval TOKEN := $(shell gql file --query-file login-bob.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
+
+login-bob-namescape: ## Login to the alpha container as a user in namespace 1
 	$(eval TOKEN := $(shell gql file --query-file login-bob.gql --endpoint http://localhost:8080/admin | jq -r '.login.response.accessJWT'))
 
 acl-accounts: login-groot
@@ -30,7 +39,23 @@ else
 	@echo "No acl-accounts.gql found"
 endif
 
-schema-gql: login-groot ## Load/update a GraphQL schema
+acl-accounts-namespace: login-root-namespace
+ifneq (,$(wildcard ./acl-accounts-namespace.gql))
+	@gql file --query-file acl-accounts-namespace.gql \
+		--header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/admin
+else
+	@echo "No acl-accounts-namescape.gql found"
+endif
+
+add-namespace: login-groot ## Add a namespace
+ifneq (,$(wildcard ./add-namespace.gql))
+	@gql file --query-file add-namespace.gql \
+		--header 'X-Dgraph-AccessToken=$(TOKEN)' --endpoint http://localhost:8080/admin
+else
+	@echo "No add-namespace.gql found"
+endif
+
+schema-gql: login-groot ## Load/update a GraphQL schema in the 0 namespace
 ifneq (,$(wildcard ./schema.graphql))
 	@curl -sS --data-binary '@./schema.graphql' \
 		--header 'X-Dgraph-AccessToken: $(TOKEN)' \
@@ -39,6 +64,17 @@ ifneq (,$(wildcard ./schema.graphql))
 else
 	@echo "No schema.graphql found"
 endif
+
+schema-gql-namespace: login-root-namespace ## Load/update a GraphQL schema in the 1 namespace
+ifneq (,$(wildcard ./schema-ns.graphql))
+	@curl -sS --data-binary '@./schema-ns.graphql' \
+		--header 'X-Dgraph-AccessToken: $(TOKEN)' \
+		--header 'content-type: application/octet-stream' \
+		http://localhost:8080/admin/schema | jq '.data.code'
+else
+	@echo "No schema-ns.graphql found"
+endif
+
 
 schema-gql-auth: login-groot ## Load/update the auth'd GraphQL schema
 ifneq (,$(wildcard ./schema-auth.graphql))
@@ -63,7 +99,7 @@ endif
 drop-data: login-groot ## Drops all data (but not the schema)
 	@curl -sS -X POST http://localhost:8080/alter --header 'X-Dgraph-AccessToken: $(TOKEN)' -d '{"drop_op": "DATA"}' | jq '.data.code'
 
-load-data-dql-json: login-groot ## Loads data from the dql-data.json file
+load-data-dql-json: login-groot ## Loads data from the dql-data.json file into the 0 namespace
 ifneq (,$(wildcard ./dql-data.json))
 	curl --data-binary '@./dql-data.json' \
 		--header 'content-type: application/json' \
@@ -71,6 +107,16 @@ ifneq (,$(wildcard ./dql-data.json))
 		http://localhost:8080/mutate?commitNow=true
 else
 	@echo "No dql-data.json file found"
+endif
+
+load-data-dql-json-namespace: login-root-namespace ## Loads data from the dql-data.json file into the 1 namespace
+ifneq (,$(wildcard ./dql-data-namespace.json))
+	curl --data-binary '@./dql-data-namespace.json' \
+		--header 'content-type: application/json' \
+		--header 'X-Dgraph-AccessToken: $(TOKEN)' \
+		http://localhost:8080/mutate?commitNow=true
+else
+	@echo "No dql-data-namespace.json file found"
 endif
 
 update-farm-status-bob: login-bob ## Updates the status of a farm as bob

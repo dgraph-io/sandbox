@@ -1,0 +1,7 @@
+mutation {
+    addNamespace(input:{password: "namespace-pw"})
+    {
+        namespaceId
+        message
+    }
+}
