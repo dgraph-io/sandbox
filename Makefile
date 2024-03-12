@@ -4,8 +4,8 @@ current_dir = $(shell pwd)
 
 keys:
 	mkdir -p ~/test-dgraph-data/acl
-	openssl rand 32 -out ~/test-dgraph-data/acl/enc_key_file
-	openssl rand 16 -hex -out ~/test-dgraph-data/acl/hmac_secret_file
+	openssl rand -out ~/test-dgraph-data/acl/enc_key_file 32
+	openssl rand -hex -out ~/test-dgraph-data/acl/hmac_secret_file 16
 
 up: ## Start the zero and alpha containers
 	DGRAPH_VERSION=$(DGRAPH_VERSION) docker-compose up zero alpha
